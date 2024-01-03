@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next";
-import { IATA_MAP, IATAS, IMAGES_MAP, AIRLINES } from "./iata";
-import { randomize } from "./utils";
+import { IATA_MAP, IATAS, IMAGES_MAP, AIRLINES } from "../utils/iata";
+import { randomize } from "../utils/utils";
 
 const shuffleArray = (array: string[]) => {
   for (let i = array.length - 1; i > 0; i--) {
