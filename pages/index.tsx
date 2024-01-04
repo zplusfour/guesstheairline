@@ -13,41 +13,54 @@ const shuffleArray = (array: string[]) => {
 export default function Home({ answer, image, options }: any) {
   const handleClick = (selectedOption: string) => {
     if (selectedOption === answer) {
-      alert('Correct!');
+      alert("Correct!");
       window.location.reload();
     } else {
-      alert('Incorrect!');
+      alert("Incorrect!");
       window.location.reload();
     }
   };
   return (
-    <div style={{justifyContent:'center', textAlign:'center',margin:'200px'}}>
-      <h1>Guess the Airline</h1><br />
-      <p><img src={image}></img></p>
+    <div
+      style={{ justifyContent: "center", textAlign: "center", margin: "200px" }}
+    >
+      <h1>Guess the Airline</h1>
+      <br />
+      <p>
+        <img src={image}></img>
+      </p>
       {options.map((option: string, index: number) => (
-        <li key={index} style={{cursor: 'pointer',
-        listStyle: 'none',
-        margin: '5px',
-        padding: '10px',
-        border: '1px solid #ccc',
-        borderRadius: '5px',
-        backgroundColor: '#f0f0f0',
-        textAlign: 'center',
-        fontWeight: 'bold',
-        textTransform: 'uppercase',
-        color: '#333',}} onClick={() => handleClick(option)}>{option}</li>
+        <li
+          key={index}
+          style={{
+            cursor: "pointer",
+            listStyle: "none",
+            margin: "5px",
+            padding: "10px",
+            border: "1px solid #ccc",
+            borderRadius: "5px",
+            backgroundColor: "#f0f0f0",
+            textAlign: "center",
+            fontWeight: "bold",
+            textTransform: "uppercase",
+            color: "#333",
+          }}
+          onClick={() => handleClick(option)}
+        >
+          {option}
+        </li>
       ))}
     </div>
   );
 }
 
-export const getServerSideProps = async ({  }) => {
+export const getServerSideProps = async ({}) => {
   let random = await randomize();
   return {
     props: {
       answer: random.airline,
       image: random.image,
-      options: random.options
-    }
-  }
-}
+      options: random.options,
+    },
+  };
+};

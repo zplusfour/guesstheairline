@@ -1,8 +1,8 @@
 import { IATA_MAP, IATAS, IMAGES_MAP, AIRLINES } from "./iata";
-import fetch from 'node-fetch';
+import fetch from "node-fetch";
 
 export const randomize: any = async () => {
-  const iata = IATAS[Math.floor(Math.random()*(IATAS.length))]
+  const iata = IATAS[Math.floor(Math.random() * IATAS.length)];
   const airline = IATA_MAP[iata];
   const image = IMAGES_MAP[iata];
   const options = [];
@@ -30,6 +30,5 @@ export const randomize: any = async () => {
     [options[i], options[j]] = [options[j], options[i]];
   }
 
-
   return { iata, airline, image, options };
-}
+};

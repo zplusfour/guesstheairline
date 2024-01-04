@@ -1,4 +1,4 @@
-import fetch from 'node-fetch'
+import fetch from "node-fetch";
 
 export const IATA_CODES = [
   {
@@ -7039,16 +7039,18 @@ export const AIRLINES: string[] = [];
 export const IATAS: string[] = [];
 export const AIRLINES_MAP: { [k: string]: string } = {};
 export const IATA_MAP: { [k: string]: string } = {};
-export const IMAGES_MAP: { [k: string]: string } = {}
+export const IMAGES_MAP: { [k: string]: string } = {};
 
 for (const a of IATA_CODES) {
   (async () => {
     if (a.iata) {
       AIRLINES.push(a.name);
       IATAS.push(a.iata);
-      AIRLINES_MAP[a.name] = a.iata;  
+      AIRLINES_MAP[a.name] = a.iata;
       IATA_MAP[a.iata] = a.name;
-      IMAGES_MAP[a.iata] = `https://content.airhex.com/content/logos/airlines_${a.iata}_250_250_t.png`
+      IMAGES_MAP[
+        a.iata
+      ] = `https://content.airhex.com/content/logos/airlines_${a.iata}_250_250_t.png`;
     }
   })();
 } // O(n) 💀
