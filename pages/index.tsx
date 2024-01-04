@@ -30,40 +30,62 @@ export default function Home({ answer, image, options }: any) {
     window.location.reload();
   };
 
+  const currentYear = new Date().getFullYear();
+  const name = "zplusfour";
+
   return (
     <div
       style={{
-        justifyContent: 'center',
-        textAlign: 'center',
-        margin: '200px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        minHeight: '100vh',
+        padding: '20px',
+        maxWidth: '600px',
+        margin: '0 auto',
       }}
     >
-      <h1>Guess the Airline</h1>
-      <p>
-        <img src={image} alt="Airline" />
+      <h1 style={{ textAlign: 'center' }}>Guess the Airline</h1>
+      <div style={{ maxWidth: '100%', textAlign: 'center' }}>
+        <img src={image} alt="Airline" style={{ width: '100%', height: 'auto' }} />
+      </div>
+      <p
+        style={{
+          fontSize: '24px',
+          fontWeight: 'bold',
+          margin: '20px 0',
+        }}
+      >
+        Score: {score}
       </p>
-      <h2>Score: {score}</h2>
-      {options.map((option: string, index: number) => (
-        <li
-          key={index}
-          style={{
-            cursor: 'pointer',
-            listStyle: 'none',
-            margin: '5px',
-            padding: '10px',
-            border: '1px solid #ccc',
-            borderRadius: '5px',
-            backgroundColor: '#f0f0f0',
-            textAlign: 'center',
-            fontWeight: 'bold',
-            textTransform: 'uppercase',
-            color: '#333',
-          }}
-          onClick={() => handleClick(option)}
-        >
-          {option}
-        </li>
-      ))}
+      <ul style={{ padding: 0, maxWidth: '100%', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        {options.map((option: string, index: number) => (
+          <li
+            key={index}
+            style={{
+              cursor: 'pointer',
+              listStyle: 'none',
+              margin: '10px 0',
+              padding: '10px',
+              border: '1px solid #ccc',
+              borderRadius: '5px',
+              backgroundColor: '#f0f0f0',
+              textAlign: 'center',
+              fontWeight: 'bold',
+              textTransform: 'uppercase',
+              color: '#333',
+              width: '100%',
+              maxWidth: '300px',
+            }}
+            onClick={() => handleClick(option)}
+          >
+            {option}
+          </li>
+        ))}
+      </ul>
+      <footer style={{ marginTop: 'auto', textAlign: 'center', padding: '20px 0', color: 'gray' }}>
+        © {currentYear} {name}
+      </footer>
     </div>
   );
 }
