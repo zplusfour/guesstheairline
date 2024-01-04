@@ -1,7 +1,7 @@
-import { randomizeNormal, randomizeTail } from "../utils/utils";
+import { randomizeTail } from "../../utils/utils";
 import { useState, useEffect } from "react";
 
-export default function Home({ answer, image, options }: any) {
+export default function Mode2({ answer, airline, options }: any) {
   const [score, setScore] = useState<number>(0);
 
   useEffect(() => {
@@ -37,13 +37,9 @@ export default function Home({ answer, image, options }: any) {
         margin: "0 auto",
       }}
     >
-      <h1 style={{ textAlign: "center" }}>Guess the Airline</h1>
+      <h1 style={{ textAlign: "center" }}>Guess the Tail</h1>
       <div style={{ maxWidth: "100%", textAlign: "center" }}>
-        <img
-          src={image}
-          alt="Airline"
-          style={{ width: "100%", height: "auto" }}
-        />
+        <h1>{airline}</h1>
       </div>
       <p
         style={{
@@ -60,31 +56,32 @@ export default function Home({ answer, image, options }: any) {
           maxWidth: "100%",
           width: "100%",
           display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          listStyle: "none",
         }}
       >
         {options.map((option: string, index: number) => (
           <li
             key={index}
             style={{
-              cursor: "pointer",
-              listStyle: "none",
-              margin: "10px 0",
-              padding: "10px",
-              border: "1px solid #ccc",
-              borderRadius: "5px",
-              backgroundColor: "#f0f0f0",
-              textAlign: "center",
-              fontWeight: "bold",
-              textTransform: "uppercase",
-              color: "#333",
-              width: "100%",
-              maxWidth: "300px",
+              margin: "5px", // Adjust margin as needed for spacing between images
+              maxWidth: "250px",
             }}
-            onClick={() => handleClick(option)}
           >
-            {option}
+            <img
+              src={option}
+              alt={`Option ${index + 1}`}
+              style={{
+                width: "250px",
+                height: "250px",
+                border: "1px solid #ccc",
+                borderRadius: "5px",
+                display: "block", // Ensures each image stays on a separate line
+              }}
+              onClick={() => handleClick(option)}
+            />
           </li>
         ))}
       </ul>
@@ -103,12 +100,23 @@ export default function Home({ answer, image, options }: any) {
 }
 
 export const getServerSideProps = async ({}) => {
-  let random = await randomizeNormal();
-  return {
-    props: {
-      answer: random.airline,
-      image: random.image,
-      options: random.options,
-    },
-  };
+  try {
+    let random = await randomizeTail();
+    return {
+      props: {
+        answer: random.image,
+        airline: random.airline,
+        options: random.options,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      props: {
+        answer: null,
+        airline: null,
+        options: [],
+      },
+    };
+  }
 };
